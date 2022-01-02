@@ -87,12 +87,7 @@ class WebsocketController extends React.Component {
                 let user_id = parsed_data['id'];
                 this.setState({message: message});
 
-                // only log valid userids
-                if (user_id && isUUID(user_id)) {
-                    self.viewModel.addMessage(message, self.userViewModel.getUserById(user_id));
-                } else if (user_id && user_id.length < 20) {
-                    self.viewModel.addMessage(message, user_id);
-                }
+                self.viewModel.addMessage(message, self.userViewModel.getUserById(user_id));
 
             } catch (e) {
                 if (!productionBuild) {
