@@ -119,8 +119,8 @@ export default class Intro extends React.Component {
 
     async skipIntroView() {
         if (this.state.cleanAsyncStorage) {
-            let keys  = await AsyncStorage.getAllKeys()
-            for (let key of keys){
+            let keys = await AsyncStorage.getAllKeys()
+            for (let key of keys) {
                 await AsyncStorage.removeItem(key)
             }
         }

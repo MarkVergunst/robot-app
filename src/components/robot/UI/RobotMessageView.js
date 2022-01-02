@@ -9,7 +9,8 @@ class RobotMessageView extends React.Component {
         if (CurrentMessage && CurrentMessage.length === 0) {
             return (
                 <View style={{flex: 0, marginTop: 10, marginBottom: 10}}>
-                    <Text style={{textAlign: "center", fontWeight: "bold", fontSize: 18}}>Last action: No actions yet</Text>
+                    <Text style={{textAlign: "center", fontWeight: "bold", fontSize: 18}}>Last action: No actions
+                        yet</Text>
                 </View>
             )
         }

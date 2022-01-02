@@ -13,7 +13,7 @@ class MessageViewModel {
 
     getSortedMessages(sortorder = "ASC") {
         return this.getAllMessages().sort(function (a, b) {
-            if (sortorder === "ASC"){
+            if (sortorder === "ASC") {
                 return new Date(b.timestamp) - new Date(a.timestamp);
             } else {
                 return new Date(a.timestamp) - new Date(b.timestamp);

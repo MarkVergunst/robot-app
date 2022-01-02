@@ -58,7 +58,7 @@ class MessageList extends React.Component {
         return (
             <FlatList style={Styles.container}
                       data={viewModel.getSortedMessages()}
-                      keyExtractor={(item, index) => item.id}
+                      keyExtractor={(item) => item.id}
                       renderItem={({item, index}) => (
                           this.renderRow(item, index)
                       )}
@@ -72,7 +72,14 @@ class MessageList extends React.Component {
     showEmptyListView = () => {
         return (
             <View
-                style={{flex: 1, flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: 10, height: 400}}>
+                style={{
+                    flex: 1,
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    padding: 10,
+                    height: 400
+                }}>
                 <Text style={{color: Colors.black}}>{"No Data to Display"}</Text>
             </View>
         )
@@ -85,7 +92,7 @@ class MessageList extends React.Component {
     renderRow = (item, index) => {
 
         return (
-            <TouchableHighlight key={index} onPress={() => this.onPressAction(item)}>
+            <TouchableHighlight key={index}>
                 <View style={Styles.listItemContainer}>
                     <View style={Styles.listDesign}>
                         <View style={Styles.columnAlign}>
@@ -102,11 +109,6 @@ class MessageList extends React.Component {
                 </View>
             </TouchableHighlight>
         );
-
-    }
-
-    onPressAction(item) {
-        return undefined;
     }
 }
 

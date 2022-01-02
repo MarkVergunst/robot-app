@@ -10,7 +10,7 @@ class RobotControlView extends React.Component {
         return (
             <View style={{flex: 2, padding: 25}}>
                 <View style={{flex: 2}}>
-                    <ArrowButton Action={Forward} DirectionIcon={"md-arrow-up"} />
+                    <ArrowButton Action={Forward} DirectionIcon={"md-arrow-up"}/>
                 </View>
                 <View style={{flex: 2, flexDirection: "row"}}>
                     <View style={{flex: 3}}>

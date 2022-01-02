@@ -16,52 +16,56 @@ const Stack = createNativeStackNavigator();
 
 class App extends Component {
 
-  private rootStore = new RootStore()
-  public viewModel: MessageViewModel;
-  private userViewModel: UserViewModel;
+    private rootStore = new RootStore()
+    public viewModel: MessageViewModel;
+    private userViewModel: UserViewModel;
 
-  constructor(props: any) {
-    super(props);
-    const {MessageModel, UserModel} = this.rootStore.getStores()
-    this.userViewModel = new UserViewModel(UserModel);
-    this.viewModel = new MessageViewModel(MessageModel);
-  }
+    constructor(props: any) {
+        super(props);
+        const {MessageModel, UserModel} = this.rootStore.getStores()
+        this.userViewModel = new UserViewModel(UserModel);
+        this.viewModel = new MessageViewModel(MessageModel);
+    }
 
-  render() {
-    return (
-        <Provider {...this.rootStore.getStores()}>
-          <NavigationContainer>
-            <Stack.Navigator initialRouteName="Intro" screenOptions={{
-              headerStyle: {
-                backgroundColor: Colors.brandPrimary,
-              },
-              headerTintColor: Colors.white,
-              headerTitleStyle: {fontWeight: 'bold',}
-            }}>
-              <Stack.Screen name="Intro" options={{headerShown: false, gestureEnabled: false}} >
-                {props => <Intro {...props} />}
-              </Stack.Screen>
-              <Stack.Screen name="Home" options={({navigation, route}) => ({
-                headerRight: () => (<Button
-                    onPress={() => navigation.push('Messages', {viewModel: this.viewModel})}
-                    title="Activity log"
-                    color="#fff"
-                />),
-                headerLeft: () => <View/>,
-                gestureEnabled: false,
-                title: "Home"
-              })}>
-                {props => <WebsocketController {...props}/>}
-              </Stack.Screen>
-              <Stack.Screen name="Messages" component={MessageList}
-                            options={{gestureEnabled: true, title: 'Recent activity'}}/>
-              <Stack.Screen name="UserFormView" component={UserController}
-                            options={{gestureEnabled: false, title: 'Your profile', headerLeft: () => <View/>}}/>
-            </Stack.Navigator>
-          </NavigationContainer>
-        </Provider>
-    )
-  }
+    render() {
+        return (
+            <Provider {...this.rootStore.getStores()}>
+                <NavigationContainer>
+                    <Stack.Navigator initialRouteName="Intro" screenOptions={{
+                        headerStyle: {
+                            backgroundColor: Colors.brandPrimary,
+                        },
+                        headerTintColor: Colors.white,
+                        headerTitleStyle: {fontWeight: 'bold',}
+                    }}>
+                        <Stack.Screen name="Intro" options={{headerShown: false, gestureEnabled: false}}>
+                            {props => <Intro {...props} />}
+                        </Stack.Screen>
+                        <Stack.Screen name="Home" options={({navigation}) => ({
+                            headerRight: () => (<Button
+                                onPress={() => navigation.push('Messages', {viewModel: this.viewModel})}
+                                title="Activity log"
+                                color="#fff"
+                            />),
+                            headerLeft: () => <View/>,
+                            gestureEnabled: false,
+                            title: "Home"
+                        })}>
+                            {props => <WebsocketController {...props}/>}
+                        </Stack.Screen>
+                        <Stack.Screen name="Messages" component={MessageList}
+                                      options={{gestureEnabled: true, title: 'Recent activity'}}/>
+                        <Stack.Screen name="UserFormView" component={UserController}
+                                      options={{
+                                          gestureEnabled: false,
+                                          title: 'Your profile',
+                                          headerLeft: () => <View/>
+                                      }}/>
+                    </Stack.Navigator>
+                </NavigationContainer>
+            </Provider>
+        )
+    }
 }
 
 export default App
